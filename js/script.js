@@ -1,22 +1,3 @@
-/*
-Fonctionnement du jeu memory
-
-choix nombre de cartes pour la partie par l'utilisateur ( nombre pair obligatoire VIA x % 2 !== 0 redemande une valeur ! )
-une fonction qui créera autant d'élément cartes que l'utilisateur veut en créer et les ajoutera dans la cardZone,
-leurs donnera une classe carte + compteur, les pushera dans un tableau et incrémentera le compteur de 1
-Le tableau une fois tous les éléments créer sera cloné.
-
-chaque élément carte aura un élément identique
-function random qui tirera des valeurs aléatoires pour placer les cartes
-faire en sorte que si la valeur aléatoire tiré représente un élément déjà existant qu'elle retire pour viser un autre endroit ( un tableau et
-un clone du tableau peuvent-être utile dans ce cas, en éliminant la valeur du tableau)
-
-fonction qui teste si les 2 cartes retourné lors du click sont les même si oui +1 point au joueur et il peut rejouer sinon on les retourne de nouveau et
-au tour du joueur suivant !
-Si toutes les cartes sont retournée ont regarde qui a le plus de points et on affiche un message comme quoi le joueur à gagné, on fait ensuite
-apparaître le bouton rejouer qui appellera la fonction reload !
- */
-
 var game = document.getElementById('game');
 var pointP1 = document.getElementById('pointP1');
 var pointP2 = document.getElementById('pointP2');
