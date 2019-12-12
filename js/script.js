@@ -33,7 +33,7 @@ while(nbCard < 4 || (nbCard % 2) !== 0){
         "supérieur ou égal à 2 ! ");
 }
 var nbPairs = nbCard / 2;
-var revealCard1;
+var card1;
 var cardReveal = false;
 var player = false;
 var failed = false;
@@ -57,9 +57,9 @@ function createCard() {
             div.className = "cards";
             cardZone.appendChild(div);
             div.addEventListener('click', function () {
-                revealCarte(this);
+                revealCard(this);
             });
-            tblCard.push(' carte' + numCardPairs);
+            tblCard.push(' card' + numCardPairs);
         }
         ++numCardPairs;
     }
@@ -92,13 +92,13 @@ function pointDisplay(nbPoint, txtPoint, player) {
 }
 
 //function that reveals/hides cards
-function revealCarte(id) {
+function revealCard(id) {
     id.style.backgroundColor = "cornflowerblue";
     id.innerHTML = id.classList[1];
     //id.innerHTML = id.className;
     setTimeout(function () {
         if(cardReveal === true){
-            if(revealCard1.className === id.className){
+            if(card1.className === id.className){
 
                 if(player === false){
                     p1Point++;
@@ -108,9 +108,9 @@ function revealCarte(id) {
                     pointDisplay(p2Point, pointP2, 2);
                 }
             }else {
-                revealCard1.style.backgroundColor = "black";
-                revealCard1.innerHTML = "";
-                revealCard1 = "";
+                card1.style.backgroundColor = "black";
+                card1.innerHTML = "";
+                card1 = "";
                 id.style.backgroundColor = "black";
                 id.innerHTML = "";
 
@@ -118,7 +118,7 @@ function revealCarte(id) {
             }
             cardReveal = false;
         }else {
-            revealCard1 = id;
+            card1 = id;
             cardReveal = true;
         }
     }, 1000);
@@ -159,7 +159,7 @@ function reload() {
     tblCardClone = tblCard.slice(0);
     tbl = [];
     numCardPairs = 0;
-    revealCard1 = "";
+    card1 = "";
     cardReveal = false;
     player = false;
     failed = false;
