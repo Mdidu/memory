@@ -37,9 +37,7 @@ function createCard() {
             var div = document.createElement('div');
             div.className = "cards";
             cardZone.appendChild(div);
-            div.addEventListener('click', function () {
-                revealCard(this);
-            });
+            div.addEventListener('click', call);
             tblCard.push(' card' + numCardPairs);
         }
         ++numCardPairs;
@@ -47,7 +45,10 @@ function createCard() {
     game.appendChild(cardZone);
     position();
 }
-
+//function to call revealCard function with a parameter and then delete the event without any particular problem
+function call(){
+    revealCard(this);
+}
 //function placing cards randomly
 function position() {
     tblCardClone = tblCard.slice(0);
@@ -76,11 +77,12 @@ function pointDisplay(nbPoint, txtPoint, player) {
 function revealCard(id) {
     id.style.backgroundColor = "cornflowerblue";
     id.innerHTML = id.classList[1];
-    //id.innerHTML = id.className;
+
+    id.removeEventListener("click", call);
+
     setTimeout(function () {
         if(cardReveal === true){
             if(card1.className === id.className){
-
                 if(player === false){
                     p1Point++;
                     pointDisplay(p1Point, pointP1, 1);
@@ -91,6 +93,8 @@ function revealCard(id) {
             }else {
                 card1.style.backgroundColor = "black";
                 card1.innerHTML = "";
+                card1.addEventListener("click", call);
+                id.addEventListener("click", call);
                 card1 = "";
                 id.style.backgroundColor = "black";
                 id.innerHTML = "";
@@ -99,6 +103,7 @@ function revealCard(id) {
             }
             cardReveal = false;
         }else {
+            id.removeEventListener("click", call);
             card1 = id;
             cardReveal = true;
         }
