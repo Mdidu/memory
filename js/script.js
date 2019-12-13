@@ -15,6 +15,7 @@ while(nbCard < 4 || (nbCard % 2) !== 0){
 }
 var nbPairs = nbCard / 2;
 var card1;
+var nbClick = 0;
 var cardReveal = false;
 var player = false;
 var failed = false;
@@ -45,6 +46,7 @@ function createCard() {
     game.appendChild(cardZone);
     position();
 }
+
 //function to call revealCard function with a parameter and then delete the event without any particular problem
 function call(){
     revealCard(this);
@@ -75,39 +77,43 @@ function pointDisplay(nbPoint, txtPoint, player) {
 
 //function that reveals/hides cards
 function revealCard(id) {
-    id.style.backgroundColor = "cornflowerblue";
-    id.innerHTML = id.classList[1];
+    nbClick++;
+    if(nbClick < 3){
+        id.style.backgroundColor = "cornflowerblue";
+        id.innerHTML = id.classList[1];
 
-    id.removeEventListener("click", call);
+        id.removeEventListener("click", call);
 
-    setTimeout(function () {
-        if(cardReveal === true){
-            if(card1.className === id.className){
-                if(player === false){
-                    p1Point++;
-                    pointDisplay(p1Point, pointP1, 1);
+        setTimeout(function () {
+            if(cardReveal === true){
+                if(card1.className === id.className){
+                    nbClick = 0;
+                    if(player === false){
+                        p1Point++;
+                        pointDisplay(p1Point, pointP1, 1);
+                    }else {
+                        p2Point++;
+                        pointDisplay(p2Point, pointP2, 2);
+                    }
                 }else {
-                    p2Point++;
-                    pointDisplay(p2Point, pointP2, 2);
+                    card1.style.backgroundColor = "black";
+                    card1.innerHTML = "";
+                    card1.addEventListener("click", call);
+                    id.addEventListener("click", call);
+                    card1 = "";
+                    id.style.backgroundColor = "black";
+                    id.innerHTML = "";
+                    nbClick = 0;
+                    playerTurn();
                 }
+                cardReveal = false;
             }else {
-                card1.style.backgroundColor = "black";
-                card1.innerHTML = "";
-                card1.addEventListener("click", call);
-                id.addEventListener("click", call);
-                card1 = "";
-                id.style.backgroundColor = "black";
-                id.innerHTML = "";
-
-                playerTurn();
+                id.removeEventListener("click", call);
+                card1 = id;
+                cardReveal = true;
             }
-            cardReveal = false;
-        }else {
-            id.removeEventListener("click", call);
-            card1 = id;
-            cardReveal = true;
-        }
-    }, 1000);
+        }, 1000);
+    }
 }
 
 //function to decide who should play
