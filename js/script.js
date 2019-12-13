@@ -8,10 +8,9 @@ var tblCard = [];
 var tblCardClone = tblCard.slice(0);
 var tbl = [];
 var numCardPairs = 0;
-var nbCard = prompt("Vous souhaitez jouer une partie avec combien de cartes?(Seul les nombres pair et supérieur à 0 sont autorisé) ");
-while(nbCard < 4 || (nbCard % 2) !== 0){
-    nbCard = prompt("Le nombre de cartes est inférieur à 4 ou est un nombre impair, veuillez rentrer un nombre de cartes pair et " +
-        "supérieur ou égal à 2 ! ");
+var nbCard = prompt("Vous souhaitez jouer une partie avec combien de cartes?(Seul les multiples de 4 (4,8,12, etc) et les nombres supérieur à 0 sont autorisé !) ");
+while(nbCard < 4 || (nbCard % 4) !== 0){
+    nbCard = prompt("Le nombre de cartes est inférieur à 4 ou n'est pas un multiple de 4 (4,8,12, etc), veuillez rentrer un multiple de 4 (4,8,12, etc) qui est supérieur à 0 ! ");
 }
 var nbPairs = nbCard / 2;
 var card1;
@@ -51,6 +50,7 @@ function createCard() {
 function call(){
     revealCard(this);
 }
+
 //function placing cards randomly
 function position() {
     tblCardClone = tblCard.slice(0);
